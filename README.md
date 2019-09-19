@@ -11,12 +11,14 @@ Deletes email threads from Gmail
 
 You can also use the Gmail API Quickstart guide (click on ENABLE THE GMAIL API): https://developers.google.com/gmail/api/quickstart/php
 
-2) Create OAuth Client ID credentials. 
+2) Create OAuth Client ID credentials
 
 If you used the Quickstart guide, they will generate them for you.
 
 3) Download your credentials JSON and save them to `auth/credentials.json`
 
-4) Run `php deleteTrash.php` and walk through the authorization process
+4) Run `composer install`
 
-5) Watch email threads disappear from your Trash folder
+5) Run `php deleteTrash.php` and walk through the authorization process
+
+6) Watch email threads disappear from your Trash folder
