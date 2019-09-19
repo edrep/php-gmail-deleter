@@ -1,0 +1,11 @@
+{
+  "require": {
+    "google/apiclient": "^2.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Edrep\\": "src/"
+    }
+  }
+}
