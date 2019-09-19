@@ -3,7 +3,7 @@
 use Edrep\Google\ClientHandler;
 use Edrep\Utils;
 
-class GmailDeleter
+class Deleter
 {
     private const APP_NAME = 'Gmail Deleter';
     private const SNIPPETS_PEEK_COUNT = 5;
@@ -16,8 +16,6 @@ class GmailDeleter
     private $service;
 
     /**
-     * GmailDeleter constructor.
-     *
      * @param string $authConfigPath credentials.json path
      * @param string $accessTokenPath token.json path
      * @throws \Exception
