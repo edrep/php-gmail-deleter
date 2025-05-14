@@ -34,9 +34,12 @@ class Deleter
     }
 
     /**
+     * Delete messages matching a specific search query
+     * 
+     * @param string $searchQuery Custom Gmail search query, defaults to "in:trash"
      * @return bool
      */
-    public function deleteTrash(): bool
+    public function deleteMessages(string $searchQuery = 'in:trash'): bool
     {
         $userId = 'me';
 
@@ -49,19 +52,21 @@ class Deleter
 
         $threadSearchParams = [
             'includeSpamTrash' => true,
-            'q' => 'in:trash',
+            'q' => $searchQuery,
             'maxResults' => self::MAX_RESULTS
         ];
 
         $results = $this->service->users_threads->listUsersThreads($userId, $threadSearchParams);
 
         if (count($results->getThreads()) === 0) {
-            print "No threads found in Trash.\n";
+            printf("No threads found for search: '%s'.\n", $searchQuery);
 
             return false;
         }
 
-        printf("Found ~%d (estimated) threads.\n", $results->getResultSizeEstimate());
+        printf("Found ~%d (estimated) threads matching '%s'.\n", 
+               $results->getResultSizeEstimate(), 
+               $searchQuery);
 
         $threadSneakPeek = $this->buildSneakPeek($results);
 
@@ -72,7 +77,7 @@ class Deleter
         }
 
         Utils::confirmOrAbort(sprintf(
-            "Are you sure you want to do delete all (~%d) of these threads?  Type 'yes' to continue: ",
+            "Are you sure you want to delete all (~%d) of these threads? Type 'yes' to continue: ",
             $results->getResultSizeEstimate()
         ));
 
